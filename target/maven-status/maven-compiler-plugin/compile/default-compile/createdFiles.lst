@@ -1,0 +1,9 @@
+org/sindaryn/testifi/StaticUtils.class
+org/sindaryn/testifi/service/TestClassesFactory.class
+org/sindaryn/testifi/service/EquivalencyMatcher.class
+org/sindaryn/testifi/generator/AnnotationProcessor.class
+org/sindaryn/testifi/generator/GraphQLApiTestFactory.class
+org/sindaryn/testifi/service/TestLogic.class
+META-INF/services/javax.annotation.processing.Processor
+org/sindaryn/testifi/service/TestFieldSpecs.class
+org/sindaryn/testifi/service/TestMethodSpecs.class
