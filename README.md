@@ -11,39 +11,13 @@ The purpose of this library is to provide a **rudimentary** level of integration
 ## Installation
 Testifi can be installed using [jitpack](https://jitpack.io/), as follows:
 #### Maven
-First add the [jitpack](https://jitpack.io/) repository:
-```
-<repositories>
-	<repository>
-		<id>jitpack.io</id>
-		<url>https://jitpack.io</url>
-	</repository>
-</repositories>
-```
-Then add the Testifi dependecy:
+Testifi is available on maven central:
 ```
 <dependency>
-	<groupId>com.github.sindaryn</groupId>
-		<artifactId>testifi</artifactId>
-	<version>${testifi.version}</version>
+    <groupId>org.sindaryn</groupId>
+        <artifactId>testifi</artifactId>
+    <version>0.0.1</version>
 </dependency>
-```
-The "version" here is equivalent to the shortened (first 7 digits of the) commit hash. Simply copy and paste the latest one. Same goes for gradle, etc.
-#### Gradle
-First add the [jitpack](https://jitpack.io/) repository:
-```
-allprojects {
-	repositories {
-		...
-		maven { url 'https://jitpack.io' }
-	}
-}
-```
-Then add the Testifi dependecy:
-```
-dependencies {
-	implementation 'com.github.sindaryn:testifi:<version>'
-}
 ```
 
 ### Requirements

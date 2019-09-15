@@ -15,7 +15,7 @@
     <version>0.0.1</version>
 
     <properties>
-        <mockeri.version>dbf4e60</mockeri.version>
+        <mockeri.version>6d3db88</mockeri.version>
         <java-hamcrest-version>2.0.0.0</java-hamcrest-version>
     </properties>
 
