@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="76ccd780-c61f-47b1-ace6-16508979701f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/sindaryn/testifi/generator/GraphQLApiTestFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/sindaryn/testifi/generator/GraphQLApiTestFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/sindaryn/testifi/service/TestLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/sindaryn/testifi/service/TestLogic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/sindaryn/testifi/service/TestMethodSpecs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/sindaryn/testifi/service/TestMethodSpecs.java" afterDir="false" />
-    </list>
+    <list default="true" id="76ccd780-c61f-47b1-ace6-16508979701f" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,7 +90,7 @@
       <workItem from="1568110683256" duration="595000" />
       <workItem from="1568113715696" duration="12025000" />
       <workItem from="1568556753830" duration="1874000" />
-      <workItem from="1568814885582" duration="4417000" />
+      <workItem from="1568814885582" duration="4807000" />
     </task>
     <servers />
   </component>

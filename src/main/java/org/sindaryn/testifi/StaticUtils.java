@@ -221,7 +221,7 @@ public abstract class StaticUtils {
                     new ArrayList<>(Arrays.asList(clazz.getAnnotation(FuzzySearchByFields.class).fields()));
 
         List<String> finalClassLevelFuzzySearchByFields = classLevelFuzzySearchByFields;
-        List<Field> fuzzySearchableFields =
+        return
                 entityType
                 .getFields()
                 .values()
@@ -231,10 +231,7 @@ public abstract class StaticUtils {
                         finalClassLevelFuzzySearchByFields.contains(field.getField().getName())
                 )
                 .map(CachedEntityField::getField)
-                .collect(Collectors.toList());
-
-        return fuzzySearchableFields.get(
-                ThreadLocalRandom.current().nextInt(0, fuzzySearchableFields.size() - 1)
-        );
+                .collect(Collectors.toList())
+                .get(0);
     }
 }
