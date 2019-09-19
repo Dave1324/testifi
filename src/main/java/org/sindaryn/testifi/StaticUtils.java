@@ -6,8 +6,11 @@ import lombok.val;
 import lombok.var;
 import org.checkerframework.checker.units.qual.A;
 import org.sindaryn.apifi.annotations.GraphQLApiEntity;
+import org.sindaryn.datafi.annotations.FuzzySearchBy;
+import org.sindaryn.datafi.annotations.FuzzySearchByFields;
 import org.sindaryn.datafi.annotations.WithResolver;
 import org.sindaryn.datafi.persistence.Archivable;
+import org.sindaryn.datafi.reflection.CachedEntityField;
 import org.sindaryn.datafi.reflection.CachedEntityType;
 import org.sindaryn.datafi.reflection.ReflectionCache;
 import org.sindaryn.datafi.service.ArchivableDataManager;
@@ -205,5 +208,33 @@ public abstract class StaticUtils {
     public static <T> Map<Object, T> firstRandomNIdMap(Class<?> clazz, BaseDataManager<T> dataManager, ReflectionCache reflectionCache) {
         return firstRandomN(clazz, dataManager).stream().collect(
                 Collectors.toMap(instance -> getId(instance, reflectionCache), instance -> instance));
+    }
+
+    public static Field resolveFieldToFuzzySearchBy(Class<?> clazz, ReflectionCache reflectionCache) {
+        CachedEntityType entityType = reflectionCache
+                .getEntitiesCache()
+                .get(clazz.getSimpleName());
+
+        List<String> classLevelFuzzySearchByFields = new ArrayList<>();
+        if(clazz.isAnnotationPresent(FuzzySearchByFields.class))
+            classLevelFuzzySearchByFields =
+                    new ArrayList<>(Arrays.asList(clazz.getAnnotation(FuzzySearchByFields.class).fields()));
+
+        List<String> finalClassLevelFuzzySearchByFields = classLevelFuzzySearchByFields;
+        List<Field> fuzzySearchableFields =
+                entityType
+                .getFields()
+                .values()
+                .stream()
+                .filter(
+                        field -> field.getField().isAnnotationPresent(FuzzySearchBy.class) ||
+                        finalClassLevelFuzzySearchByFields.contains(field.getField().getName())
+                )
+                .map(CachedEntityField::getField)
+                .collect(Collectors.toList());
+
+        return fuzzySearchableFields.get(
+                ThreadLocalRandom.current().nextInt(0, fuzzySearchableFields.size() - 1)
+        );
     }
 }

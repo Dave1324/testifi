@@ -1,6 +1,7 @@
 package org.sindaryn.testifi.service;
 
 import com.google.common.collect.Lists;
+import com.maximeroussy.invitrode.WordGenerator;
 import org.sindaryn.apifi.service.ApiLogic;
 import org.sindaryn.apifi.service.ApiMetaOperations;
 import org.sindaryn.apifi.service.EmbeddedCollectionMetaOperations;
@@ -11,6 +12,7 @@ import org.sindaryn.datafi.service.ArchivableDataManager;
 import org.sindaryn.datafi.service.BaseDataManager;
 import org.sindaryn.datafi.service.DataManager;
 import org.sindaryn.mockeri.generator.EntityMocker;
+import org.sindaryn.mockeri.generator.TestDataGenerator;
 import org.sindaryn.testifi.StaticUtils;
 
 import java.lang.reflect.Field;
@@ -34,17 +36,40 @@ public interface TestLogic {
 
     //test methods
     static <T, E extends ApiMetaOperations<T>> void
-    getAllTest(Class<?> clazz, BaseDataManager<T> dataManager, E metaOps){
+    getAllTest(Class<?> clazz, BaseDataManager<T> dataManager, ReflectionCache reflectionCache, E metaOps){
         int offset = 0;
         int limit = totalCount(clazz, dataManager);
         Collection<T> allTs = dataManager.findAll((Class<T>)clazz);
-        Collection<T> allApiFetchedTs = ApiLogic.getAll(clazz, dataManager, metaOps, limit, offset);
+        Collection<T> allApiFetchedTs = ApiLogic
+                .getAll(clazz, dataManager, reflectionCache, metaOps, offset, limit, null, null);
         assertThat(
             "result of api call to 'getAll" + pluralCamelCaseName(clazz) + 
                    "()' " + " equals original entries in database",
                 allTs,
                 isEqualTo(allApiFetchedTs));
     }
+
+    static <T, E extends ApiMetaOperations<T>> void
+    fuzzySearchTest(Class<?> clazz, BaseDataManager<T> dataManager, ReflectionCache reflectionCache, E metaOps){
+        int offset = 0;
+        int limit = totalCount(clazz, dataManager);
+        Collection<T> allTs = dataManager.findAll((Class<T>)clazz);
+        Field toSearchBy = resolveFieldToFuzzySearchBy(clazz, reflectionCache);
+        WordGenerator wordGenerator = new WordGenerator();
+        String searchTerm = wordGenerator.newWord(ThreadLocalRandom.current().nextInt(1, 5));
+        String prefix = wordGenerator.newWord(ThreadLocalRandom.current().nextInt(0, 5));
+        String suffix = wordGenerator.newWord(ThreadLocalRandom.current().nextInt(0, 5));
+        String testValue = prefix + searchTerm + suffix;
+        allTs.forEach(t -> setField(t, testValue, toSearchBy.getName()));
+        dataManager.saveAll(allTs);
+        Collection<T> allApiFuzzySearchFetchedTs = ApiLogic.fuzzySearch(clazz, dataManager, metaOps, offset, limit, searchTerm, null, null);
+        assertThat(
+                "result of api call to " + pluralCamelCaseName(clazz) + "FuzzySearch" +
+                        "(...)' " + " equals original entries in database",
+                allTs,
+                isEqualTo(allApiFuzzySearchFetchedTs));
+    }
+
 
     static <T, E extends ApiMetaOperations<T>> void
     getByIdTest(Class<?> clazz, BaseDataManager<T> dataManager, E metaOps, ReflectionCache reflectionCache){

@@ -15,13 +15,13 @@
     <version>0.0.1</version>
 
     <properties>
-        <mockeri.version>6d3db88</mockeri.version>
+        <mockeri.version>a128943</mockeri.version>
         <java-hamcrest-version>2.0.0.0</java-hamcrest-version>
     </properties>
 
     <dependencies>
         <dependency>
-            <groupId>com.github.sindaryn</groupId>
+            <groupId>com.github.Dave1324</groupId>
             <artifactId>mockeri</artifactId>
             <version>${mockeri.version}</version>
         </dependency>

@@ -35,10 +35,11 @@ public class TestMethodSpecs {
         return MethodSpec.methodBuilder(testName)
                 .addModifiers(Modifier.PUBLIC)
                 .addAnnotation(Test.class)
-                .addStatement("$T.getAllTest($T.class, $L, $L)",
+                .addStatement("$T.getAllTest($T.class, $L, $L, $L)",
                         testLogic,
                         ClassName.get(entity),
                         dataManagerName(entity),
+                        reflectionCache,
                         metaOpsName(entity)
                 )
                 .returns(void.class)
