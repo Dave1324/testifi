@@ -57,9 +57,9 @@ public interface TestLogic {
         Collection<T> allTs = dataManager.findAll((Class<T>)clazz);
         Field toSearchBy = resolveFieldToFuzzySearchBy(clazz, reflectionCache);
         WordGenerator wordGenerator = new WordGenerator();
-        String searchTerm = wordGenerator.newWord(ThreadLocalRandom.current().nextInt(1, 5));
-        String prefix = wordGenerator.newWord(ThreadLocalRandom.current().nextInt(0, 5));
-        String suffix = wordGenerator.newWord(ThreadLocalRandom.current().nextInt(0, 5));
+        String searchTerm = wordGenerator.newWord(ThreadLocalRandom.current().nextInt(3, 5));
+        String prefix = wordGenerator.newWord(ThreadLocalRandom.current().nextInt(3, 5));
+        String suffix = wordGenerator.newWord(ThreadLocalRandom.current().nextInt(3, 5));
         String testValue = prefix + searchTerm + suffix;
         allTs.forEach(t -> setField(t, testValue, toSearchBy.getName()));
         dataManager.saveAll(allTs);
