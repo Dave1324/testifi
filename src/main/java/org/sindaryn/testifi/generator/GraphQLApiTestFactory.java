@@ -80,7 +80,7 @@ public class GraphQLApiTestFactory {
         if(apiEntityAnnotation.exposeDirectly()){
             builder
                     .addMethod(testMethodSpecs.generateGetAllEndpointTest(entity))
-                    /*.addMethod(testMethodSpecs.generateGetAllSortedByEndpointTest(entity))*/
+                    .addMethod(testMethodSpecs.generateFuzzySearchEndpointTest(entity))
                     .addMethod(testMethodSpecs.generateGetByIdEndpointTest(entity))
                     .addMethod(testMethodSpecs.generateGetCollectionByIdEndpointTest(entity));
 

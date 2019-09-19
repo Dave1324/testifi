@@ -3,75 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="76ccd780-c61f-47b1-ace6-16508979701f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/sindaryn/testifi/StaticUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/sindaryn/testifi/StaticUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/sindaryn/testifi/generator/GraphQLApiTestFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/sindaryn/testifi/generator/GraphQLApiTestFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/sindaryn/testifi/service/TestLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/sindaryn/testifi/service/TestLogic.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/sindaryn/testifi/service/TestMethodSpecs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/sindaryn/testifi/service/TestMethodSpecs.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/apidocs/allclasses-frame.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/apidocs/allclasses-noframe.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/apidocs/constant-values.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/apidocs/deprecated-list.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/apidocs/help-doc.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/apidocs/index-all.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/apidocs/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/apidocs/org/sindaryn/testifi/StaticUtils.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/apidocs/org/sindaryn/testifi/class-use/StaticUtils.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/apidocs/org/sindaryn/testifi/generator/AnnotationProcessor.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/apidocs/org/sindaryn/testifi/generator/GraphQLApiTestFactory.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/apidocs/org/sindaryn/testifi/generator/class-use/AnnotationProcessor.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/apidocs/org/sindaryn/testifi/generator/class-use/GraphQLApiTestFactory.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/apidocs/org/sindaryn/testifi/generator/package-frame.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/apidocs/org/sindaryn/testifi/generator/package-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/apidocs/org/sindaryn/testifi/generator/package-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/apidocs/org/sindaryn/testifi/generator/package-use.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/apidocs/org/sindaryn/testifi/package-frame.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/apidocs/org/sindaryn/testifi/package-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/apidocs/org/sindaryn/testifi/package-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/apidocs/org/sindaryn/testifi/package-use.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/apidocs/org/sindaryn/testifi/service/EquivalencyMatcher.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/apidocs/org/sindaryn/testifi/service/TestClassesFactory.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/apidocs/org/sindaryn/testifi/service/TestFieldSpecs.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/apidocs/org/sindaryn/testifi/service/TestLogic.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/apidocs/org/sindaryn/testifi/service/TestMethodSpecs.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/apidocs/org/sindaryn/testifi/service/class-use/EquivalencyMatcher.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/apidocs/org/sindaryn/testifi/service/class-use/TestClassesFactory.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/apidocs/org/sindaryn/testifi/service/class-use/TestFieldSpecs.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/apidocs/org/sindaryn/testifi/service/class-use/TestLogic.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/apidocs/org/sindaryn/testifi/service/class-use/TestMethodSpecs.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/apidocs/org/sindaryn/testifi/service/package-frame.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/apidocs/org/sindaryn/testifi/service/package-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/apidocs/org/sindaryn/testifi/service/package-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/apidocs/org/sindaryn/testifi/service/package-use.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/apidocs/overview-frame.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/apidocs/overview-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/apidocs/overview-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/apidocs/package-list" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/apidocs/script.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/apidocs/stylesheet.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/sindaryn/testifi/service/TestLogic.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/sindaryn/testifi/service/TestLogic.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/sindaryn/testifi/service/TestMethodSpecs.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/sindaryn/testifi/service/TestMethodSpecs.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/javadoc-bundle-options/javadoc-options-javadoc-resources.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/javadoc-bundle-options/package-list" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/nexus-staging/staging/db6d72199ab382.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/nexus-staging/staging/db6d72199ab382/.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/nexus-staging/staging/db6d72199ab382/org/sindaryn/testifi/0.0.1/testifi-0.0.1-javadoc.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/nexus-staging/staging/db6d72199ab382/org/sindaryn/testifi/0.0.1/testifi-0.0.1-javadoc.jar.asc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/nexus-staging/staging/db6d72199ab382/org/sindaryn/testifi/0.0.1/testifi-0.0.1-sources.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/nexus-staging/staging/db6d72199ab382/org/sindaryn/testifi/0.0.1/testifi-0.0.1-sources.jar.asc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/nexus-staging/staging/db6d72199ab382/org/sindaryn/testifi/0.0.1/testifi-0.0.1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/nexus-staging/staging/db6d72199ab382/org/sindaryn/testifi/0.0.1/testifi-0.0.1.jar.asc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/nexus-staging/staging/db6d72199ab382/org/sindaryn/testifi/0.0.1/testifi-0.0.1.pom" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/nexus-staging/staging/db6d72199ab382/org/sindaryn/testifi/0.0.1/testifi-0.0.1.pom.asc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/nexus-staging/staging/db6d72199ab382/org/sindaryn/testifi/maven-metadata-nexus.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/testifi-0.0.1-javadoc.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/testifi-0.0.1-javadoc.jar.asc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/testifi-0.0.1-sources.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/testifi-0.0.1-sources.jar.asc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/testifi-0.0.1.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/testifi-0.0.1.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/testifi-0.0.1.jar.asc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/testifi-0.0.1.pom" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/testifi-0.0.1.pom.asc" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -161,7 +95,7 @@
       <workItem from="1568110683256" duration="595000" />
       <workItem from="1568113715696" duration="12025000" />
       <workItem from="1568556753830" duration="1874000" />
-      <workItem from="1568814885582" duration="2875000" />
+      <workItem from="1568814885582" duration="4417000" />
     </task>
     <servers />
   </component>

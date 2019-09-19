@@ -50,7 +50,8 @@ public interface TestLogic {
     }
 
     static <T, E extends ApiMetaOperations<T>> void
-    fuzzySearchTest(Class<?> clazz, BaseDataManager<T> dataManager, ReflectionCache reflectionCache, E metaOps){
+    fuzzySearchTest(
+            Class<?> clazz, BaseDataManager<T> dataManager, ReflectionCache reflectionCache, E metaOps){
         int offset = 0;
         int limit = totalCount(clazz, dataManager);
         Collection<T> allTs = dataManager.findAll((Class<T>)clazz);

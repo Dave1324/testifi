@@ -46,6 +46,22 @@ public class TestMethodSpecs {
                 .build();
     }
 
+    public MethodSpec generateFuzzySearchEndpointTest(TypeElement entity) {
+        String testName = pluralPascalCaseName(entity) + "FuzzySearchTest";
+        return MethodSpec.methodBuilder(testName)
+                .addModifiers(Modifier.PUBLIC)
+                .addAnnotation(Test.class)
+                .addStatement("$T.fuzzySearchTest($T.class, $L, $L, $L)",
+                        testLogic,
+                        ClassName.get(entity),
+                        dataManagerName(entity),
+                        reflectionCache,
+                        metaOpsName(entity)
+                )
+                .returns(void.class)
+                .build();
+    }
+
     /*public MethodSpec generateGetAllSortedByEndpointTest(TypeElement entity){
         String testName = "all" + toPlural(camelcaseNameOf(entity)) + "SortedByTest";
         return MethodSpec.methodBuilder(testName)
