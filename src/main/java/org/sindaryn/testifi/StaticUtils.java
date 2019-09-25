@@ -136,6 +136,19 @@ public abstract class StaticUtils {
         return getEntitiesSet(roundEnvironment);
     }
 
+    public static boolean isFuzzySearchable(TypeElement entity) {
+        List<String> classLevelFuzzySearchByFields = new ArrayList<>();
+        if(entity.getAnnotation(FuzzySearchByFields.class) != null)
+           classLevelFuzzySearchByFields = new ArrayList<String>(Arrays.asList(entity.getAnnotation(FuzzySearchByFields.class).fields()));
+        for (Map.Entry<String, VariableElement> entry : getFieldsOfTypeElement(entity).entrySet()) {
+            String key = entry.getKey();
+            VariableElement val = entry.getValue();
+            if (val.getAnnotation(FuzzySearchBy.class) != null || classLevelFuzzySearchByFields.contains(val.getSimpleName().toString()))
+                return true;
+        }
+        return false;
+    }
+
     public static String collectionTypeString(VariableElement embedded) {
         String typeNameString = embedded.asType().toString();
         typeNameString = typeNameString.replaceAll("^.+<", "");

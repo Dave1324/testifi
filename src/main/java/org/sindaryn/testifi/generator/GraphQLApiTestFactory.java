@@ -40,6 +40,7 @@ import static org.sindaryn.apifi.StaticUtils.getFields;
 import static org.sindaryn.apifi.StaticUtils.isArchivable;
 import static org.sindaryn.datafi.StaticUtils.writeToJavaFile;
 import static org.sindaryn.testifi.StaticUtils.entityMocker;
+import static org.sindaryn.testifi.StaticUtils.isFuzzySearchable;
 
 @RequiredArgsConstructor
 public class GraphQLApiTestFactory {
@@ -76,9 +77,10 @@ public class GraphQLApiTestFactory {
         if(entity.getAnnotation(NonDirectlyExposable.class) == null){
             builder
                     .addMethod(testMethodSpecs.generateGetAllEndpointTest(entity))
-                    .addMethod(testMethodSpecs.generateFuzzySearchEndpointTest(entity))
                     .addMethod(testMethodSpecs.generateGetByIdEndpointTest(entity))
                     .addMethod(testMethodSpecs.generateGetCollectionByIdEndpointTest(entity));
+            if(isFuzzySearchable(entity))
+                builder.addMethod(testMethodSpecs.generateFuzzySearchEndpointTest(entity));
 
             if(entity.getAnnotation(ApiReadOnly.class) == null){
                 builder
