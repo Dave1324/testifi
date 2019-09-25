@@ -17,6 +17,7 @@ import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.tools.Diagnostic;
 import java.lang.reflect.Field;
@@ -228,5 +229,11 @@ public abstract class StaticUtils {
                 .map(CachedEntityField::getField)
                 .collect(Collectors.toList())
                 .get(0);
+    }
+
+    public static<T> void populate(Class<?> clazz, EntityMocker entityMocker, int desiredNumInstances){
+        for (int i = 0; i < desiredNumInstances; i++) {
+            entityMocker.instantiateEntity(clazz);
+        }
     }
 }

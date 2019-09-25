@@ -294,6 +294,7 @@ public interface TestLogic {
                                                   String fieldName,
                                                   EntityMocker entityMocker,
                                                   ReflectionCache reflectioncache) {
+        if(hasTDataManager.count() == 0) populate(hasTClazz, entityMocker, 20);
         List<HasT> owners = firstRandomN(hasTClazz, hasTDataManager);
         Collection<T> embeddedEntities = new ArrayList<>();
         T embeddedEntity;
@@ -318,6 +319,7 @@ public interface TestLogic {
                                                              String fieldName,
                                                              EntityMocker entityMocker,
                                                              ReflectionCache reflectioncache) {
+        if(hasTsDataManager.count() == 0) populate(hasTsClazz, entityMocker, 20);
         List<HasTs> owners = firstRandomN(hasTsClazz, hasTsDataManager);
         Collection<Collection<T>> embeddedEntityCollections = new ArrayList<>();
         Collection<T> embeddedEntityCollection;
