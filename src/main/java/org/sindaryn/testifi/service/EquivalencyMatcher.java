@@ -6,13 +6,12 @@ import lombok.RequiredArgsConstructor;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
-import org.sindaryn.datafi.annotations.NonCascadeUpdatable;
-import org.sindaryn.datafi.annotations.NonCascadeUpdatables;
+import org.sindaryn.datafi.annotations.NonApiUpdatable;
+import org.sindaryn.datafi.annotations.NonApiUpdatables;
 
 import javax.persistence.Column;
 import java.lang.reflect.Field;
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static org.sindaryn.datafi.reflection.ReflectionCache.getClassFields;
 
@@ -88,10 +87,10 @@ public class EquivalencyMatcher extends TypeSafeMatcher<Object> {
     private boolean isUpdatableField(Field field) {
         Object parent = field.getDeclaringClass();
         return !(field.isAnnotationPresent(Column.class) && !field.getAnnotation(Column.class).updatable()) &&
-                !field.isAnnotationPresent(NonCascadeUpdatable.class) &&
+                !field.isAnnotationPresent(NonApiUpdatable.class) &&
                 !(
-                        parent.getClass().isAnnotationPresent(NonCascadeUpdatables.class) &&
-                                Arrays.asList(parent.getClass().getAnnotation(NonCascadeUpdatables.class).value())
+                        parent.getClass().isAnnotationPresent(NonApiUpdatables.class) &&
+                                Arrays.asList(parent.getClass().getAnnotation(NonApiUpdatables.class).value())
                                         .contains(field.getName())
                 );
     }

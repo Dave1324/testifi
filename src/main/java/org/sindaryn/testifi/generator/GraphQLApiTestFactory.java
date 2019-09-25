@@ -5,7 +5,8 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.var;
 import org.junit.runner.RunWith;
-import org.sindaryn.apifi.annotations.GraphQLApiEntity;
+import org.sindaryn.apifi.annotations.ApiReadOnly;
+import org.sindaryn.apifi.annotations.NonDirectlyExposable;
 import org.sindaryn.apifi.generator.EntitiesInfoCache;
 import org.sindaryn.apifi.generator.FieldSpecs;
 import org.sindaryn.datafi.annotations.GetAllBy;
@@ -70,21 +71,16 @@ public class GraphQLApiTestFactory {
                         .build())
                 .addAnnotation(SpringBootTest.class)
                 .addAnnotation(Transactional.class);
-        //.. fetch the annotation
-        GraphQLApiEntity apiEntityAnnotation = entity.getAnnotation(GraphQLApiEntity.class);
-
-
-        //and begin!
 
         //if this
-        if(apiEntityAnnotation.exposeDirectly()){
+        if(entity.getAnnotation(NonDirectlyExposable.class) == null){
             builder
                     .addMethod(testMethodSpecs.generateGetAllEndpointTest(entity))
                     .addMethod(testMethodSpecs.generateFuzzySearchEndpointTest(entity))
                     .addMethod(testMethodSpecs.generateGetByIdEndpointTest(entity))
                     .addMethod(testMethodSpecs.generateGetCollectionByIdEndpointTest(entity));
 
-            if(!apiEntityAnnotation.readOnly()){
+            if(entity.getAnnotation(ApiReadOnly.class) == null){
                 builder
                         .addMethod(testMethodSpecs.generateAddEndpointTest(entity))
                         .addMethod(testMethodSpecs.generateUpdateEndpointTest(entity))
@@ -102,7 +98,7 @@ public class GraphQLApiTestFactory {
             }
         }
         builder
-                .addField(fieldSpecs.metaOps(apiEntityAnnotation, entity))
+                .addField(fieldSpecs.metaOps(entity))
                 .addField(fieldSpecs.reflectionCache())
                 .addField(fieldSpecs.dataManager(entity))
                 .addField(FieldSpec.builder(EntityMocker.class, entityMocker(), Modifier.PRIVATE)
@@ -155,7 +151,7 @@ public class GraphQLApiTestFactory {
                 addDataManager(field, builder, typeArgs);
             }
             //add to collection
-            if(entitiesInfoCache.isStrongEntity(field)){
+            if(entitiesInfoCache.exposeDirectly(field)){
                 builder.addMethod(testMethodSpecs.generateAttachExistingToEmbeddedCollectionTest(field, entity));
             }else {
                 builder.addMethod(testMethodSpecs.generateAddNewToEmbeddedCollectionTest(field, entity));

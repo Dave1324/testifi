@@ -39,7 +39,7 @@ public interface TestLogic {
     getAllTest(Class<?> clazz, BaseDataManager<T> dataManager, ReflectionCache reflectionCache, E metaOps){
         int offset = 0;
         int limit = totalCount(clazz, dataManager);
-        Collection<T> allTs = dataManager.findAll((Class<T>)clazz);
+        Collection<T> allTs = dataManager.findAll();
         Collection<T> allApiFetchedTs = ApiLogic
                 .getAll(clazz, dataManager, reflectionCache, metaOps, offset, limit, null, null);
         assertThat(
@@ -54,7 +54,7 @@ public interface TestLogic {
             Class<?> clazz, BaseDataManager<T> dataManager, ReflectionCache reflectionCache, E metaOps){
         int offset = 0;
         int limit = totalCount(clazz, dataManager);
-        Collection<T> allTs = dataManager.findAll((Class<T>)clazz);
+        Collection<T> allTs = dataManager.findAll();
         Field toSearchBy = resolveFieldToFuzzySearchBy(clazz, reflectionCache);
         WordGenerator wordGenerator = new WordGenerator();
         String searchTerm = wordGenerator.newWord(ThreadLocalRandom.current().nextInt(3, 5));
@@ -63,7 +63,8 @@ public interface TestLogic {
         String testValue = prefix + searchTerm + suffix;
         allTs.forEach(t -> setField(t, testValue, toSearchBy.getName()));
         dataManager.saveAll(allTs);
-        Collection<T> allApiFuzzySearchFetchedTs = ApiLogic.fuzzySearch(clazz, dataManager, metaOps, offset, limit, searchTerm, null, null);
+        Collection<T> allApiFuzzySearchFetchedTs = ApiLogic
+                .fuzzySearch(clazz, dataManager, metaOps, offset, limit, searchTerm, null, null);
         assertThat(
                 "result of api call to " + pluralCamelCaseName(clazz) + "FuzzySearch" +
                         "(...)' " + " equals original entries in database",
@@ -74,7 +75,7 @@ public interface TestLogic {
 
     static <T, E extends ApiMetaOperations<T>> void
     getByIdTest(Class<?> clazz, BaseDataManager<T> dataManager, E metaOps, ReflectionCache reflectionCache){
-        T toGetById = randomFrom(dataManager.findAll((Class<T>) clazz));
+        T toGetById = randomFrom(dataManager.findAll());
         Object id = getId(toGetById, reflectionCache);
         T fetchedById = ApiLogic.getById(clazz, dataManager, metaOps, id);
         assertThat(clazz.getSimpleName() + " successfully fetched by id",
@@ -84,7 +85,7 @@ public interface TestLogic {
 
     static <T, E extends ApiMetaOperations<T>> void
     getByUniqueTest(Class<?> clazz, BaseDataManager<T> dataManager, E metaOps, String fieldName, ReflectionCache reflectionCache){
-        T toGet = randomFrom(dataManager.findAll((Class<T>) clazz));
+        T toGet = randomFrom(dataManager.findAll());
         Object uniqueValue = reflectionCache.getEntitiesCache().get(clazz.getSimpleName()).invokeGetter(toGet, fieldName);
         T fetched = ApiLogic.getByUnique(clazz, dataManager, metaOps, fieldName, uniqueValue);
         assertThat(
@@ -96,10 +97,10 @@ public interface TestLogic {
     static <T, E extends ApiMetaOperations<T>> void
     getByTest(Class<?> clazz, BaseDataManager<T> dataManager, E metaOps, String fieldName, ReflectionCache reflectionCache){
 
-        T toGet = randomFrom(dataManager.findAll((Class<T>) clazz));
+        T toGet = randomFrom(dataManager.findAll());
         final CachedEntityType entityType = reflectionCache.getEntitiesCache().get(clazz.getSimpleName());
         Object value = entityType.invokeGetter(toGet, fieldName);
-        Collection<T> fetched = ApiLogic.getBy(clazz, dataManager, metaOps, fieldName, value);
+        Collection<T> fetched = ApiLogic.getBy(dataManager, metaOps, fieldName, value);
         for(T instance : fetched){
             assertThat(
                     "successfully fetched instance of " + clazz.getSimpleName() +
@@ -115,7 +116,7 @@ public interface TestLogic {
         Map<Object, T> toGet = firstRandomNIdMap(clazz, dataManager, reflectionCache);
         final CachedEntityType entityType = reflectionCache.getEntitiesCache().get(clazz.getSimpleName());
         List<?> valuesList = fieldValues(fieldName, Arrays.asList(toGet.values().toArray()), entityType);
-        Collection<T> fetched = ApiLogic.getAllBy(clazz, dataManager, metaOps, fieldName, valuesList);
+        Collection<T> fetched = ApiLogic.getAllBy(dataManager, metaOps, fieldName, valuesList);
         assertTrue(fetched.size() >= toGet.size());
         for(T fetchedInstance : fetched){
             T toGetInstance = toGet.get(getId(fetchedInstance, reflectionCache));
@@ -142,7 +143,7 @@ public interface TestLogic {
                 }
             }
         }
-        Collection<T> selected = ApiLogic.selectBy(clazz, dataManager, metaOps, resolverName, new ArrayList<>(args.values()));
+        Collection<T> selected = ApiLogic.selectBy(dataManager, metaOps, resolverName, new ArrayList<>(args.values()));
         assertTrue(selected.size() >= toSelect.size());
         for (T selectedInstance : selected){
             T toSelectInstance = toSelect.get(getId(selectedInstance, reflectionCache));
@@ -238,16 +239,16 @@ public interface TestLogic {
     deleteTest(Class<?> clazz, BaseDataManager<T> dataManager, ReflectionCache reflectionCache, EntityMocker entityMocker, E metaOps){
         T toDelete = randomInstance(clazz, dataManager);
         T deleted = ApiLogic.delete(dataManager, reflectionCache, toDelete, metaOps);
-        Optional<T> shouldNotBePresent = dataManager.findById((Class<T>) clazz, getId(deleted, reflectionCache));
+        Optional<T> shouldNotBePresent = dataManager.findById(getId(deleted, reflectionCache));
         assertFalse(clazz.getSimpleName() + " successfully deleted", shouldNotBePresent.isPresent());
         entityMocker.instantiateEntity(clazz);
     }
 
     static <T>  void
     getCollectionByIdTest(Class<?> clazz, BaseDataManager<T> dataManager){
-        Collection<T> present = dataManager.findAll((Class<T>) clazz);
+        Collection<T> present = dataManager.findAll();
         List<?> ids = dataManager.idList(present);
-        Collection<T> fetched = ApiLogic.getCollectionById(clazz, dataManager, ids);
+        Collection<T> fetched = ApiLogic.getCollectionById(dataManager, ids);
         assertThat( "successfully fetched " + present.size() + " " + toPlural(clazz.getSimpleName()) + " by id",
                 present, isEqualTo(fetched));
     }
@@ -280,7 +281,7 @@ public interface TestLogic {
         int amountToDelete = toDelete.size();
         ApiLogic.deleteCollection(dataManager, toDelete, metaOps);
         Collection<?> ids = dataManager.idList(toDelete);
-        Collection<T> shouldBeEmpty = dataManager.findAllById((Class<T>) clazz, ids);
+        Collection<T> shouldBeEmpty = dataManager.findAllById(ids);
         assertTrue(amountToDelete + " " + toPlural(clazz.getSimpleName()) + " successfully deleted",
                 shouldBeEmpty.isEmpty());
         for (int i = 0; i < amountToDelete; i++) entityMocker.instantiateEntity(clazz);
@@ -302,7 +303,7 @@ public interface TestLogic {
             embeddedEntities.add(embeddedEntity);
         }
         owners = hasTDataManager.saveAll(owners);
-        Collection<T> fetchedAsEmbedded = ApiLogic.getAsEmbeddedEntity(tClazz, tDataManager, owners, fieldName, reflectioncache);
+        Collection<T> fetchedAsEmbedded = ApiLogic.getAsEmbeddedEntity(tDataManager, owners, fieldName, reflectioncache);
         assertThat(
                 "successfully fetched " + fetchedAsEmbedded.size() + " " + toPlural(fieldName) +
                         " embedded within " + owners.size() + " " + toPlural(hasTClazz.getSimpleName()),
@@ -327,7 +328,7 @@ public interface TestLogic {
         }
         owners = hasTsDataManager.saveAll(owners);
         List<List<T>> fetchedAsEmbedded = ApiLogic
-                .getAsEmbeddedCollection(tClazz, tDataManager, owners, fieldName, reflectioncache);
+                .getAsEmbeddedCollection(tDataManager, owners, fieldName, reflectioncache);
 
         assertThat(
                 "Successfully fetched " + embeddedEntityCollections.size() +

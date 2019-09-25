@@ -1,21 +1,13 @@
 package org.sindaryn.testifi;
 
 import com.google.common.collect.Sets;
-import lombok.NonNull;
-import lombok.val;
 import lombok.var;
-import org.checkerframework.checker.units.qual.A;
-import org.sindaryn.apifi.annotations.GraphQLApiEntity;
 import org.sindaryn.datafi.annotations.FuzzySearchBy;
 import org.sindaryn.datafi.annotations.FuzzySearchByFields;
-import org.sindaryn.datafi.annotations.WithResolver;
-import org.sindaryn.datafi.persistence.Archivable;
 import org.sindaryn.datafi.reflection.CachedEntityField;
 import org.sindaryn.datafi.reflection.CachedEntityType;
 import org.sindaryn.datafi.reflection.ReflectionCache;
-import org.sindaryn.datafi.service.ArchivableDataManager;
 import org.sindaryn.datafi.service.BaseDataManager;
-import org.sindaryn.datafi.service.DataManager;
 import org.sindaryn.mockeri.generator.EntityMocker;
 
 import javax.annotation.processing.ProcessingEnvironment;
@@ -27,14 +19,10 @@ import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Id;
 import javax.tools.Diagnostic;
-
 import java.lang.reflect.Field;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.function.Function;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
-
 
 import static org.sindaryn.datafi.StaticUtils.*;
 import static org.sindaryn.datafi.reflection.ReflectionCache.getClassFields;
@@ -50,7 +38,7 @@ public abstract class StaticUtils {
 
     @SuppressWarnings("unchecked")
     public static <T> T randomInstance(Class<?> clazz, BaseDataManager<T> dataManager) {
-        return randomFrom(dataManager.findAll((Class<T>) clazz));
+        return randomFrom(dataManager.findAll());
     }
 
     public static void setField(Object entity, Object value, String fieldName){
@@ -103,7 +91,7 @@ public abstract class StaticUtils {
 
     @SuppressWarnings("unchecked")
     public static <T> int totalCount(Class<?> clazz, BaseDataManager<T> dataManager) {
-        return Math.toIntExact(dataManager.count((Class<T>) clazz));
+        return Math.toIntExact(dataManager.count());
     }
     public static int randomCount(Class<?> clazz, BaseDataManager dataManager) {
         return ThreadLocalRandom.current().nextInt(1, totalCount(clazz, dataManager));
@@ -111,7 +99,7 @@ public abstract class StaticUtils {
     @SuppressWarnings("unchecked")
     public static <T> List<T> firstRandomN(Class<?> clazz, BaseDataManager<T> dataManager) {
         return dataManager
-                .findAll((Class<T>) clazz)
+                .findAll()
                 .stream().limit(randomCount(clazz, dataManager)).collect(Collectors.toList());
     }
 
@@ -145,13 +133,7 @@ public abstract class StaticUtils {
 
     @SuppressWarnings("unchecked")
     public static Set<? extends TypeElement> getGraphQLApiEntities(Set<? extends TypeElement> annotations, RoundEnvironment roundEnvironment) {
-        Set<TypeElement> entities = new HashSet<>();
-        for (TypeElement annotationType : annotations) {
-            if (annotationType.getQualifiedName().toString().equals(GraphQLApiEntity.class.getCanonicalName())) {
-                entities.addAll((Collection<? extends TypeElement>) roundEnvironment.getElementsAnnotatedWith(annotationType));
-            }
-        }
-        return Sets.newHashSet(entities);
+        return getEntitiesSet(roundEnvironment);
     }
 
     public static String collectionTypeString(VariableElement embedded) {
